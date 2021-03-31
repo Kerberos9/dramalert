@@ -23,6 +23,9 @@ const twitterClient = new TwitterClient({
 
 const stalkAccounts = bot => {
   fs.readdir(dataFolder, (err, files) => {
+    if (!files) {
+      return;
+    }
     files
       .filter(f => !f.includes('-ignored'))
       .forEach(f => {
