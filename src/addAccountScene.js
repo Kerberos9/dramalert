@@ -61,7 +61,7 @@ const step3 = c => {
   }
   info.number = number;
   client.query(
-    `INSERT INTO accounts VALUES (user_id = ${c.chat.id}, account = ${info.user}, number = ${info.number})`,
+    `INSERT INTO accounts(user_id, account, number) VALUES (${c.chat.id}, '${info.user}', ${info.number})`,
     (err, data) => {
       c.reply(
         `Hecho! Te avisaré cuando el usuario @${info.user} tenga un tuit con ${info.number} o más interacciones.`
