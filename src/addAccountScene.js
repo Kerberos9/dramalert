@@ -2,7 +2,6 @@ const { WizardScene, Composer, Scenes, Context } = require('telegraf');
 const diskdb = require('diskdb');
 const { Pool } = require('pg');
 let info = {};
-let db;
 const client = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
@@ -13,7 +12,6 @@ const client = new Pool({
 client.connect();
 
 const step1 = c => {
-  db = diskdb.connect('./data', [String(c.chat.id)])[String(c.chat.id)];
   c.reply('Cuál es el @ que debo vigilar?');
   return c.wizard.next();
 };

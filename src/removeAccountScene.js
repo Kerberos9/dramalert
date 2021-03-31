@@ -2,7 +2,6 @@ const { WizardScene, Composer, Scenes, Context } = require('telegraf');
 const diskdb = require('diskdb');
 const { Pool } = require('pg');
 let info = {};
-let db;
 const client = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
