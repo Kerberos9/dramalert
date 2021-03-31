@@ -43,7 +43,7 @@ bot.command('cuentas', c => {
     console.log(data ? data.rows : 'Sin datos en cuentas');
     if (data && data.rows) {
       let response = '';
-      data.rows.forEach(a => {
+      data.rows.forEach((a, i) => {
         response += `${i + 1}. @${d.user} -- ${d.number}\n`;
         c.reply(response);
       });
