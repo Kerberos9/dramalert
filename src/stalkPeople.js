@@ -29,6 +29,7 @@ const stalkAccounts = async bot => {
     //console.log(data.rows);
     if (data && data.rows.length > 0) {
       data.rows.forEach(async d => {
+        console.log(data);
         let account = data.account;
         let id = data.user_id;
         let number = data.number;
