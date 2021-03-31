@@ -14,8 +14,6 @@ const twitter_api_secret = process.env.twitter_api_secret;
 const twitter_access_token = process.env.twitter_access_token;
 const twitter_access_token_secret = process.env.twitter_access_token_secret;
 
-const diskdb = require('diskdb');
-
 const twitterClient = new TwitterClient({
   apiKey: twitter_api_key,
   apiSecret: twitter_api_secret,
