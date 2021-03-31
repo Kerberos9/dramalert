@@ -27,7 +27,7 @@ const stalkAccounts = async bot => {
   await client.query(`SELECT * FROM accounts;`, (err, data) => {
     //console.log(data.rows);
     if (data && data.rows.length > 0) {
-      data.forEach(async d => {
+      data.rows.forEach(async d => {
         let account = data.account;
         let id = data.user_id;
         let number = data.number;
