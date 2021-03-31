@@ -33,7 +33,6 @@ const stalkAccounts = async bot => {
         const tweets = await twitterClient.tweets.search({
           q: `from:${account} since:2021-01-01`
         });
-        console.log('Tuits totales: ' + tweets.statuses.length);
         tweets.statuses
           .filter(t => !t.retweeted_status)
           .forEach(async t => {
@@ -48,6 +47,7 @@ const stalkAccounts = async bot => {
                       id,
                       `Tuit potencialmente dramático de @${account}: https://twitter.com/${account}/status/${t.id_str} `
                     );
+                    console.log(`Enviado tuit dramático a ${id} de @${account}`);
                     client.query(
                       `INSERT INTO ignored (user_id, tweet) values ('${id}', '${t.id_str}');`,
                       async (err, data) => {
