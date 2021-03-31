@@ -60,7 +60,7 @@ const stalkAccounts = async bot => {
                       `INSERT INTO ignored (user_id, tweet) values ('${id}', '${t.id_str}');`,
                       async (err, data) => {
                         if (err) {
-                          console.log('Error al insertar');
+                          console.log('Error al insertar ' + err);
                         }
                       }
                     );
