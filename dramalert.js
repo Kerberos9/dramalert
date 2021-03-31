@@ -30,6 +30,9 @@ bot.command('ayuda', c =>
 );
 bot.command('cuentas', c => {
   fs.readFile('./data/' + c.chat.id + '.json', (err, data) => {
+    if (!data) {
+      return;
+    }
     let accounts = JSON.parse(data);
     let response = '';
     if (accounts.length === 0) {
