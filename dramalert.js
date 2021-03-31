@@ -41,9 +41,9 @@ bot.command('ayuda', c =>
 bot.command('cuentas', c => {
   client.query(`SELECT * FROM accounts WHERE user_id = '${c.chat.id}'`, (err, data) => {
     console.log(data ? data.rows : 'Sin datos en cuentas');
-    if (data) {
+    if (data && data.rows) {
       let response = '';
-      data.forEach(a => {
+      data.rows.forEach(a => {
         a.forEach((d, i) => (response += `${i + 1}. @${d.user} -- ${d.number}\n`));
         c.reply(response);
       });
