@@ -45,25 +45,12 @@ bot.command('cuentas', c => {
       let response = '';
       data.rows.forEach((a, i) => {
         response += `${i + 1}. @${a.account} -- ${Math.floor(a.number)}\n`;
-        c.reply(response);
       });
+      c.reply(response);
     } else {
       c.reply('No tienes cuentas vigiladas.');
     }
   });
-
-  /*fs.readFile('./data/' + c.chat.id + '.json', (err, data) => {
-    if (!data) {
-      return;
-    }
-    let accounts = JSON.parse(data);
-    
-    if (accounts.length === 0) {
-      c.reply('No tienes cuentas vigiladas.');
-    } else {
-      
-    }
-  });*/
 });
 let intervalId = setInterval(() => stalkAccounts(bot), 10000);
 bot.launch();
