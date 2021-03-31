@@ -52,7 +52,8 @@ bot.command('cuentas', c => {
     }
   });
 });
-let intervalId = setInterval(() => stalkAccounts(bot), 5000);
+//let intervalId = setInterval(() => stalkAccounts(bot), 5000);
+stalkAccounts(bot);
 bot.launch();
 
 process.once('SIGINT', () => bot.stop('SIGINT'));
