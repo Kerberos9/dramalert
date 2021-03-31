@@ -18,7 +18,7 @@ const step1 = c => {
   return c.wizard.next();
 };
 
-const step2 = c => {
+const step2 = async c => {
   // TODO: Comprobar si existe en twitter?
   if (c.message.text === '/cancelar') {
     return c.scene.leave();
@@ -28,7 +28,7 @@ const step2 = c => {
     text = c.message.text.substring(1);
   }
 
-  client.query(
+  await client.query(
     `SELECT * FROM accounts WHERE user_id = '${c.chat.id}' and account = '${text}'`,
     (err, data) => {
       //console.log(data.rows);

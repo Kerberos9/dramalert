@@ -13,12 +13,12 @@ const step1 = c => {
   c.reply('Cuál es el @ que debo eliminar?');
   return c.wizard.next();
 };
-const step2 = c => {
+const step2 = async c => {
   if (c.message.text === '/cancelar') {
     return c.scene.leave();
   }
   console.log('Eliminando ' + c.message.text);
-  client.query(
+  await client.query(
     `SELECT * FROM accounts WHERE user_id = '${c.chat.id}' and account = '${c.message.text}'`,
     (err, data) => {
       console.log('asd');
