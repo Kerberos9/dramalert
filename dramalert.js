@@ -26,7 +26,7 @@ bot.command('info', c => {
 bot.start(c =>
   c.reply(
     `Bienvenidx a Dramalert, ${
-      c.chat.type === 'group' ? c.chat.title : c.from.first_name
+      c.chat.type === 'group' ? c.chat.title : c.from.username
     }!\nEn este bot podrás configurar cuentas de twitter para enterarte cuando alguno de sus tuits tenga más de X interacciones, lo que significa que probablemente la están liando.\nUsa /ayuda si quieres ver los comandos disponibles.`
   )
 );
@@ -40,7 +40,8 @@ bot.command('ayuda', c =>
 );
 bot.command('cuentas', c => {
   client.query(`SELECT * FROM accounts WHERE user_id = '${c.chat.id}'`, (err, data) => {
-    console.log(err ? err : 'Sin errores al insertar');
+    console.log(err ? err : '');
+    console.log(`${c.from.username ? c.from.username : c.chat.title} ha comprobado sus cuentas.`);
     if (data && data.rows.length > 0) {
       let response = '';
       data.rows.forEach((a, i) => {
