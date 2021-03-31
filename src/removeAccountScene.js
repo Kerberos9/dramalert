@@ -19,14 +19,14 @@ const step2 = c => {
   }
   console.log('Eliminando ' + c.message.text);
   client.query(
-    `SELECT * FROM accounts WHERE user_id = '${c.chat.id}' and account = '${c.message.text}'`,
+    `SELECT * FROM accounts WHERE user_id = ${c.chat.id} and account = '${c.message.text}'`,
     (err, data) => {
       console.log(err ? err : 'Sin errores al buscar');
       console.log(data ? data : 'Sin datos al buscar');
       //console.log(data.rows);
       if (data && data.rows.length > 0) {
         client.query(
-          `DELETE * FROM accounts WHERE user_id = '${c.chat.id}' and account = '${c.message.text}'`,
+          `DELETE * FROM accounts WHERE user_id = ${c.chat.id} and account = '${c.message.text}'`,
           (err, data) => {
             console.log(err ? err : 'Sin errores al eliminar');
             console.log(data ? data : 'Sin datos al eliminar');
