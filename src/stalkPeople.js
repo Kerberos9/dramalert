@@ -24,6 +24,7 @@ const twitterClient = new TwitterClient({
 });
 
 const stalkAccounts = async bot => {
+  console.log('Stalkeando...');
   await client.query(`SELECT * FROM accounts;`, (err, data) => {
     //console.log(data.rows);
     if (data && data.rows.length > 0) {
@@ -31,10 +32,11 @@ const stalkAccounts = async bot => {
         let account = data.account;
         let id = data.user_id;
         let number = data.number;
-
+        console.log('Stalkeando cuenta ' + account);
         const tweets = await twitterClient.tweets.search({
           q: `from:${account} since:2021-01-01`
         });
+        console.log('Tuits totales: ' + tweets.statuses.length);
         tweets.statuses
           .filter(t => !t.retweeted_status)
           .forEach(async t => {
