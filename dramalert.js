@@ -44,7 +44,7 @@ bot.command('cuentas', c => {
     if (data && data.rows) {
       let response = '';
       data.rows.forEach((a, i) => {
-        response += `${i + 1}. @${a.account} -- ${a.number}\n`;
+        response += `${i + 1}. @${a.account} -- ${Math.floor(a.number)}\n`;
         c.reply(response);
       });
     } else {
