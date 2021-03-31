@@ -34,7 +34,9 @@ const step2 = async c => {
       //console.log(data.rows);
       if (data && data.rows.length > 0) {
         c.reply(
-          `El usuario @${text} ya está siendo vigilado, con ${data.rows[0].number} interacciones. \nSi quieres cambiar el número, por favor, bórralo antes de añadirlo de nuevo.`
+          `El usuario @${text} ya está siendo vigilado, con ${Math.floor(
+            data.rows[0].number
+          )} interacciones. \nSi quieres cambiar el número, por favor, bórralo antes de añadirlo de nuevo.`
         );
         return c.scene.leave();
       } else {

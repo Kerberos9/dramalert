@@ -27,7 +27,7 @@ const step2 = async c => {
       //console.log(data.rows);
       if (data && data.rows.length > 0) {
         client.query(
-          `DELETE * FROM accounts WHERE user_id = '${c.chat.id}' and account = '${c.message.text}'`,
+          `DELETE FROM accounts WHERE user_id = '${c.chat.id}' and account = '${c.message.text}'`,
           (err, data) => {
             console.log(err ? err : 'Sin errores al eliminar');
             console.log(data ? data : 'Sin datos al eliminar');
