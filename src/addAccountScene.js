@@ -63,7 +63,7 @@ const step3 = c => {
     `INSERT INTO accounts(user_id, account, number) VALUES (${c.chat.id}, '${info.user}', ${info.number})`,
     (err, data) => {
       console.log(err ? err : 'Sin errores al insertar');
-      console.log(data ? data : 'Sin datos al insertar');
+      console.log(data ? '' : 'Sin datos al insertar');
       c.reply(
         `Hecho! Te avisaré cuando el usuario @${info.user} tenga un tuit con ${info.number} o más interacciones.`
       );

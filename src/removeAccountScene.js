@@ -19,16 +19,14 @@ const step2 = async c => {
   await client.query(
     `SELECT * FROM accounts WHERE user_id = '${c.chat.id}' and account = '${c.message.text}'`,
     (err, data) => {
-      console.log('asd');
       console.log(err ? err : 'Sin errores al buscar');
-      console.log(data ? data : 'Sin datos al buscar');
-      //console.log(data.rows);
+      console.log(data ? '' : 'Sin datos al buscar');
       if (data && data.rows.length > 0) {
         client.query(
           `DELETE FROM accounts WHERE user_id = '${c.chat.id}' and account = '${c.message.text}'`,
           (err, data) => {
             console.log(err ? err : 'Sin errores al eliminar');
-            console.log(data ? data : 'Sin datos al eliminar');
+            console.log(data ? '' : 'Sin datos al eliminar');
             c.reply(`Cuenta @${c.message.text} eliminada.`);
             return c.scene.leave();
           }
