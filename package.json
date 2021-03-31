@@ -1,0 +1,34 @@
+{
+  "name": "dramalert",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dramalert.js",
+  "dependencies": {
+    "diskdb": "^0.1.17",
+    "prettier": "^2.2.1",
+    "telegraf": "^4.3.0",
+    "twitter": "^1.7.1",
+    "twitter-api-client": "^1.3.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kerberos9/dramalert.git"
+  },
+  "author": "@Keruberos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kerberos9/dramalert/issues"
+  },
+  "homepage": "https://github.com/Kerberos9/dramalert#readme",
+  "nodemonConfig": {
+    "ignore": [
+      "data/*"
+    ]
+  }
+}
