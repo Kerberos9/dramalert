@@ -53,6 +53,9 @@ const stalkAccounts = async bot => {
                       id,
                       `Tuit potencialmente dramático de @${account}: https://twitter.com/${account}/status/${t.id_str} `
                     );
+                    console.log(
+                      `Insertando query: INSERT INTO ignored (user_id, tweet) values ('${id}', '${t.id_str}');`
+                    );
                     client.query(
                       `INSERT INTO ignored (user_id, tweet) values ('${id}', '${t.id_str}');`,
                       async (err, data) => {
