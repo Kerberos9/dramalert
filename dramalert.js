@@ -40,7 +40,7 @@ bot.command('ayuda', c =>
 );
 bot.command('cuentas', c => {
   client.query(`SELECT * FROM accounts WHERE user_id = '${c.chat.id}'`, (err, data) => {
-    console.log(data ? '' : 'Sin datos en cuentas');
+    console.log(err ? err : 'Sin errores al insertar');
     if (data && data.rows.length > 0) {
       let response = '';
       data.rows.forEach((a, i) => {
