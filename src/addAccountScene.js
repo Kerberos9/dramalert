@@ -31,7 +31,7 @@ const step2 = c => {
   client.query(
     `SELECT * FROM accounts WHERE user_id = ${c.chat.id} and account = ${text}`,
     (err, data) => {
-      console.log(data);
+      console.log(data.rows);
       if (data && data.rows.length > 0) {
         c.reply(
           `El usuario @${text} ya está siendo vigilado, con ${results[0].number} interacciones. \nSi quieres cambiar el número, por favor, bórralo antes de añadirlo de nuevo.`
@@ -61,7 +61,7 @@ const step3 = c => {
   }
   info.number = number;
   client.query(
-    `INSERT INTO accounts VALUES (user_id = ${c.chat.id}, account = ${text})`,
+    `INSERT INTO accounts VALUES (user_id = ${c.chat.id}, account = ${info.user}, number = ${info.number})`,
     (err, data) => {
       c.reply(
         `Hecho! Te avisaré cuando el usuario @${info.user} tenga un tuit con ${info.number} o más interacciones.`
