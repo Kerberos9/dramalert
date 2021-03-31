@@ -1,6 +1,6 @@
 const { WizardScene, Composer, Scenes, Context } = require('telegraf');
 const diskdb = require('diskdb');
-const { Client } = require('pg');
+const { Pool } = require('pg');
 let info = {};
 let db;
 const client = new Pool({
