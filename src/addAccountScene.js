@@ -31,8 +31,8 @@ const step2 = c => {
   client.query(
     `SELECT * FROM accounts WHERE user_id = ${c.chat.id} and account = ${text}`,
     (err, data) => {
-      console.log(data);
-      if (data.length > 0) {
+      console.log(data.rows);
+      if (data && data.rows.length > 0) {
         c.reply(
           `El usuario @${text} ya está siendo vigilado, con ${results[0].number} interacciones. \nSi quieres cambiar el número, por favor, bórralo antes de añadirlo de nuevo.`
         );

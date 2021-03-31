@@ -40,7 +40,7 @@ bot.command('ayuda', c =>
 );
 bot.command('cuentas', c => {
   client.query(`SELECT * FROM accounts WHERE user_id = ${c.chat.id}`, (err, data) => {
-    console.log(data);
+    console.log(data.rows);
   });
 
   /*fs.readFile('./data/' + c.chat.id + '.json', (err, data) => {
