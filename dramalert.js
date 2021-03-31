@@ -40,7 +40,9 @@ bot.command('ayuda', c =>
 );
 bot.command('cuentas', c => {
   client.query(`SELECT * FROM accounts WHERE user_id = '${c.chat.id}'`, (err, data) => {
-    console.log(err ? err : '');
+    if (err) {
+      console.log(err);
+    }
     console.log(`${c.from.username ? c.from.username : c.chat.title} ha comprobado sus cuentas.`);
     if (data && data.rows.length > 0) {
       let response = '';
