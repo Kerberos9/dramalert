@@ -41,6 +41,15 @@ bot.command('ayuda', c =>
 bot.command('cuentas', c => {
   client.query(`SELECT * FROM accounts WHERE user_id = '${c.chat.id}'`, (err, data) => {
     console.log(data ? data.rows : 'Sin datos en cuentas');
+    if (data) {
+      let response = '';
+      data.forEach(a => {
+        a.forEach((d, i) => (response += `${i + 1}. @${d.user} -- ${d.number}\n`));
+        c.reply(response);
+      });
+    } else {
+      c.reply('No tienes cuentas vigiladas.');
+    }
   });
 
   /*fs.readFile('./data/' + c.chat.id + '.json', (err, data) => {
@@ -48,12 +57,11 @@ bot.command('cuentas', c => {
       return;
     }
     let accounts = JSON.parse(data);
-    let response = '';
+    
     if (accounts.length === 0) {
       c.reply('No tienes cuentas vigiladas.');
     } else {
-      accounts.forEach((d, i) => (response += `${i + 1}. @${d.user} -- ${d.number}\n`));
-      c.reply(response);
+      
     }
   });*/
 });
