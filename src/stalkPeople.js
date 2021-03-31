@@ -50,7 +50,7 @@ const stalkAccounts = async bot => {
                     return;
                   } else {
                     bot.telegram.sendMessage(
-                      f.split('.json')[0],
+                      id,
                       `Tuit potencialmente dramático de @${account}: https://twitter.com/${account}/status/${t.id_str} `
                     );
                     client.query(
