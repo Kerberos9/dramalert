@@ -17,6 +17,7 @@ const step2 = c => {
   if (c.message.text === '/cancelar') {
     return c.scene.leave();
   }
+  console.log('Eliminando ' + c.message.text);
   client.query(
     `SELECT * FROM accounts WHERE user_id = '${c.chat.id}' and account = '${c.message.text}'`,
     (err, data) => {
