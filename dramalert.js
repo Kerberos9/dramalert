@@ -1,5 +1,5 @@
 const { Telegraf, Scenes, Stage, session } = require('telegraf');
-const { api_key } = require('./config');
+const { api_key } = process.env.api_key || require('./config');
 const { addAccountScene } = require('./src/addAccountScene');
 const { removeAccountScene } = require('./src/removeAccountScene');
 const { stalkAccounts } = require('./src/stalkPeople');

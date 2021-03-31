@@ -1,12 +1,16 @@
 const fs = require('fs');
 const dataFolder = './data/';
 const { TwitterClient } = require('twitter-api-client');
-const {
+/*const {
   twitter_api_key,
   twitter_api_secret,
   twitter_access_token,
   twitter_access_token_secret
-} = require('../config');
+} = require('../config');*/
+const twitter_api_key = process.env.twitter_api_key;
+const twitter_api_secret = process.env.twitter_api_secret;
+const twitter_access_token = process.env.twitter_access_token;
+const twitter_access_token_secret = process.env.twitter_access_token_secret;
 
 const diskdb = require('diskdb');
 
