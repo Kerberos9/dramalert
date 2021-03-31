@@ -37,17 +37,18 @@ const step2 = async c => {
           `El usuario @${text} ya está siendo vigilado, con ${data.rows[0].number} interacciones. \nSi quieres cambiar el número, por favor, bórralo antes de añadirlo de nuevo.`
         );
         return c.scene.leave();
+      } else {
+        let user = text;
+        if (user.length < 2) {
+          c.reply('El @ es muy corto, ponlo bien por favor.');
+          return;
+        }
+        info.user = user;
+        c.reply('Con cuántas interacciones debería avisarte?');
+        return c.wizard.next();
       }
     }
   );
-  let user = text;
-  if (user.length < 2) {
-    c.reply('El @ es muy corto, ponlo bien por favor.');
-    return;
-  }
-  info.user = user;
-  c.reply('Con cuántas interacciones debería avisarte?');
-  return c.wizard.next();
 };
 
 const step3 = c => {
