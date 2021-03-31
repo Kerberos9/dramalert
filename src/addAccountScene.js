@@ -1,5 +1,4 @@
 const { WizardScene, Composer, Scenes, Context } = require('telegraf');
-const diskdb = require('diskdb');
 const { Pool } = require('pg');
 let info = {};
 const client = new Pool({
@@ -29,7 +28,6 @@ const step2 = async c => {
   await client.query(
     `SELECT * FROM accounts WHERE user_id = '${c.chat.id}' and account = '${text}'`,
     (err, data) => {
-      //console.log(data.rows);
       if (data && data.rows.length > 0) {
         c.reply(
           `El usuario @${text} ya está siendo vigilado, con ${Math.floor(
