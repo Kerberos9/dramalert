@@ -5,6 +5,7 @@
   "main": "dramalert.js",
   "dependencies": {
     "diskdb": "^0.1.17",
+    "pg": "^8.5.1",
     "prettier": "^2.2.1",
     "telegraf": "^4.3.0",
     "twitter": "^1.7.1",

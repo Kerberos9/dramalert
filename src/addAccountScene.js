@@ -3,6 +3,14 @@ const diskdb = require('diskdb');
 
 let info = {};
 let db;
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+
+client.connect();
 
 const step1 = c => {
   db = diskdb.connect('./data', [String(c.chat.id)])[String(c.chat.id)];
@@ -20,13 +28,18 @@ const step2 = c => {
     text = c.message.text.substring(1);
   }
 
-  let results = db.find({ user: text });
-  if (results.length > 0) {
-    c.reply(
-      `El usuario @${text} ya está siendo vigilado, con ${results[0].number} interacciones. \nSi quieres cambiar el número, por favor, bórralo antes de añadirlo de nuevo.`
-    );
-    return c.scene.leave();
-  }
+  client.query(
+    `SELECT * FROM accounts WHERE user_id = ${c.chat.id} and account = ${text}`,
+    (err, data) => {
+      console.log(data);
+      if (data.length > 0) {
+        c.reply(
+          `El usuario @${text} ya está siendo vigilado, con ${results[0].number} interacciones. \nSi quieres cambiar el número, por favor, bórralo antes de añadirlo de nuevo.`
+        );
+        return c.scene.leave();
+      }
+    }
+  );
   let user = text;
   if (user.length < 2) {
     c.reply('El @ es muy corto, ponlo bien por favor.');
@@ -47,12 +60,18 @@ const step3 = c => {
     return;
   }
   info.number = number;
-  db.save(info);
-  c.reply(
-    `Hecho! Te avisaré cuando el usuario @${info.user} tenga un tuit con ${info.number} o más interacciones.`
+  client.query(
+    `INSERT INTO accounts VALUES (user_id = ${c.chat.id}, account = ${text})`,
+    (err, data) => {
+      c.reply(
+        `Hecho! Te avisaré cuando el usuario @${info.user} tenga un tuit con ${info.number} o más interacciones.`
+      );
+      console.log(
+        `${c.from.username} añadió la cuenta @${info.user} con ${info.number} interacciones`
+      );
+      return c.scene.leave();
+    }
   );
-  console.log(`${c.from.username} añadió la cuenta @${info.user} con ${info.number} interacciones`);
-  return c.scene.leave();
 };
 
 const addAccountScene = new Scenes.WizardScene(

@@ -6,6 +6,16 @@ const { stalkAccounts } = require('./src/stalkPeople');
 const fs = require('fs');
 const bot = new Telegraf(api_key);
 const stage = new Scenes.Stage([addAccountScene, removeAccountScene]);
+const { Client } = require('pg');
+
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+
+client.connect();
 
 bot.use(session());
 bot.use(stage.middleware());
@@ -29,7 +39,11 @@ bot.command('ayuda', c =>
   )
 );
 bot.command('cuentas', c => {
-  fs.readFile('./data/' + c.chat.id + '.json', (err, data) => {
+  client.query(`SELECT * FROM accounts WHERE user_id = ${c.chat.id}`, (err, data) => {
+    console.log(data);
+  });
+
+  /*fs.readFile('./data/' + c.chat.id + '.json', (err, data) => {
     if (!data) {
       return;
     }
@@ -41,7 +55,7 @@ bot.command('cuentas', c => {
       accounts.forEach((d, i) => (response += `${i + 1}. @${d.user} -- ${d.number}\n`));
       c.reply(response);
     }
-  });
+  });*/
 });
 let intervalId = setInterval(() => stalkAccounts(bot), 10000);
 bot.launch();
