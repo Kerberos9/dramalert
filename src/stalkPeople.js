@@ -22,14 +22,14 @@ const twitterClient = new TwitterClient({
 });
 
 const stalkAccounts = async bot => {
-  console.log('Stalkeando...');
+  //console.log('Stalkeando...');
   await client.query(`SELECT * FROM accounts;`, (err, data) => {
     if (data && data.rows.length > 0) {
       data.rows.forEach(async d => {
         let account = d.account;
         let id = d.user_id;
         let number = d.number;
-        console.log('Stalkeando cuenta ' + account);
+        //console.log('Stalkeando cuenta ' + account);
         const tweets = await twitterClient.tweets.search({
           q: `from:${account} since:2021-01-01`
         });
