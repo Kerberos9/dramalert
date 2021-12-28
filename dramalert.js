@@ -7,7 +7,7 @@ const fs = require('fs');
 const bot = new Telegraf(api_key);
 const stage = new Scenes.Stage([addAccountScene, removeAccountScene]);
 const { Client } = require('pg');
-
+const keepAlive = require('./server');
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
   ssl: {
@@ -56,6 +56,7 @@ bot.command('cuentas', c => {
   });
 });
 let intervalId = setInterval(() => stalkAccounts(bot), 60000);
+keepAlive();
 bot.launch();
 
 process.once('SIGINT', () => bot.stop('SIGINT'));
